@@ -1,5 +1,6 @@
 import React from 'react';
 import { Store } from './Store';
+import './index.css';
 
 interface IEpisode {
   airdate: string,
@@ -33,12 +34,14 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
-      <h1>Rick and Morty</h1>
-      <p>Pick your favourite episode</p>
-      <section>
+      <header className="header">
+        <h1>Rick and Morty</h1>
+        <p>Pick your favourite episode</p>
+      </header>
+      <section className="episode-layout">
         {state.episodes.map((episode: IEpisode) => {
           return (
-            <section key={episode.id}>
+            <section key={episode.id} className="episode-box">
               <img src={episode.image && episode.image.medium} alt={`Rick and Morty ${episode.name}`} />
               <div>{episode.name}</div>
               <section>
