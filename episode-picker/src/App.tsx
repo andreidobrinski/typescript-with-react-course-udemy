@@ -1,20 +1,7 @@
 import React from 'react';
 import { Store } from './Store';
+import { IEpisode, IAction } from './interfaces';
 import './index.css';
-
-interface IEpisode {
-  airdate: string,
-  airstamp: string,
-  airtime: string,
-  id: number,
-  image: {medium: string, original: string},
-  name: string,
-  number: number,
-  runtime: number,
-  season: number,
-  summary: string,
-  url: string
-}
 
 const App = (): JSX.Element => {
   const {state, dispatch} = React.useContext(Store);
@@ -32,6 +19,11 @@ const App = (): JSX.Element => {
     });
   }
 
+  const toggleFavAction = (episode: IEpisode): IAction => dispatch({
+    type: 'ADD_FAV',
+    payload: episode
+  });
+
   return (
     <React.Fragment>
       <header className="header">
@@ -45,7 +37,10 @@ const App = (): JSX.Element => {
               <img src={episode.image && episode.image.medium} alt={`Rick and Morty ${episode.name}`} />
               <div>{episode.name}</div>
               <section>
-                Season: {episode.season} Number: {episode.number}
+                <div>Season: {episode.season} Number: {episode.number}</div>
+                <button onClick={() => toggleFavAction(episode)} type="button">
+                  Fav
+                  </button>
               </section>
             </section>
           )
